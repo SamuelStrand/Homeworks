@@ -24,7 +24,6 @@ max_row_3 = worksheet_3.max_row
 print(max_row_3)
 max_column_3 = worksheet_3.max_column
 print(max_column_3)
-
 workbook_new = Workbook()
 
 ws1 = workbook_new.create_sheet("Sheet_1", 0)
