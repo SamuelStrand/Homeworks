@@ -1,32 +1,13 @@
 import sys
 import time
-from PySide6.QtWidgets import QApplication, QWidget, QLineEdit, QLabel, QGridLayout, QCheckBox, QPushButton, QSlider, \
-    QComboBox, QVBoxLayout
+from PySide6.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QPushButton
 from threading import Thread
 
-        # hours_label.config(text=f"{hours}")
-        # minuts_label.config(text=f"{minutes}")
-        # seconds_label.config(text=f"{seconds}")
-        # print(f"{hours}:{minutes}" + ":" + str(seconds))
+hours = 0
+minutes = 0
+seconds = 0
 
-
-def stop_timer():
-    global pause
-
-    pause = False
-
-
-def reset_timer():
-    global hours
-    hours = 0
-    global minutes
-    minutes = 0
-    global seconds
-    seconds = 0
-
-    # hours_label.config(text=f"{hours}")
-    # minuts_label.config(text=f"{minutes}")
-    # seconds_label.config(text=f"{seconds}")
+pause = True
 
 
 class MainWindow(QWidget):
@@ -39,7 +20,14 @@ class MainWindow(QWidget):
         self.button_start = QPushButton('Start')
         self.layout.addWidget(self.button_start, 1, 6)
         self.button_start.clicked.connect(self.start_new_thread)
-        # self.button_start.clicked.connect(start_timer)
+
+        self.button_stop = QPushButton('Stop')
+        self.layout.addWidget(self.button_stop, 1, 7)
+        self.button_stop.clicked.connect(self.stop_timer)
+
+        self.button_reset = QPushButton('Reset')
+        self.layout.addWidget(self.button_reset, 1, 8)
+        self.button_reset.clicked.connect(self.reset_timer)
 
         self.hours_label = QLabel('00')
         self.layout.addWidget(self.hours_label, 0, 1)
@@ -56,33 +44,51 @@ class MainWindow(QWidget):
         self.seconds_label = QLabel('00')
         self.layout.addWidget(self.seconds_label, 0, 5)
 
-        self.button_stop = QPushButton('Stop')  # экзампляр строки ввода текста
-        self.layout.addWidget(self.button_stop, 1, 7)
-
-        self.button_reset = QPushButton('Reset')  # экзампляр строки ввода текста
-        self.layout.addWidget(self.button_reset, 1, 8)
-
         self.show()
-    def start_timer(self):
-        pause = True
-        self.pause = pause
+
+    def stop_timer(self):
+        global pause
+
+        pause = False
+        print('paused')
+
+    def reset_timer(self):
+        global hours
         hours = 0
+        global minutes
         minutes = 0
+        global seconds
         seconds = 0
 
-        while pause:
+        self.hours_label.setText("00")
+        self.minutes_label.setText("00")
+        self.seconds_label.setText("00")
+
+        print("Already reset")
+
+    def start_timer(self):
+        global pause
+
+        pause = True
+
+        global hours
+        global minutes
+        global seconds
+
+        while pause is True:
             seconds += 1
             if seconds > 59:
                 minutes += 1
                 seconds = 0
-                if minutes > 59:
-                    hours += 1
-                    minutes = 0
-                    if hours > 23:
-                        seconds = 0
-                        minutes = 0
-                        hours = 0
-            time.sleep(0.01)
+            if minutes > 59:
+                hours += 1
+                minutes = 0
+            if hours > 23:
+                seconds = 0
+                minutes = 0
+                hours = 0
+
+            time.sleep(1)
             self.hours_label.setText(str(hours))
             self.minutes_label.setText(str(minutes))
             self.seconds_label.setText(str(seconds))
