@@ -4,7 +4,6 @@ import sys
 import time
 from threading import Thread
 
-
 hours = 0
 minutes = 0
 seconds = 0
@@ -60,12 +59,12 @@ def reset_timer():
 #             minutes = 0
 #             hours = 0
 
-        # time.sleep(0.00001)
+# time.sleep(0.00001)
 
-        # hours_label.config(text=f"{hours}")
-        # minuts_label.config(text=f"{minutes}")
-        # seconds_label.config(text=f"{seconds}")
-        # print(f"{hours}:{minutes}" + ":" + str(seconds))
+# hours_label.config(text=f"{hours}")
+# minuts_label.config(text=f"{minutes}")
+# seconds_label.config(text=f"{seconds}")
+# print(f"{hours}:{minutes}" + ":" + str(seconds))
 
 
 # # определение(создание) функции
@@ -76,10 +75,8 @@ def reset_timer():
 #     # будет виснуть
 
 
-
-
 class MainWindow(QWidget):
-   def __init__(self, width=640, heigth=480, title='calculator'):
+    def __init__(self, width=640, heigth=480, title='calculator'):
         QWidget.__init__(self)
 
         layout = QGridLayout
@@ -125,12 +122,6 @@ class MainWindow(QWidget):
     #                 seconds = 0
     #                 minutes = 0
     #                 hours = 0
-
-
-
-
-
-
 
 
 app = QApplication(sys.argv)
