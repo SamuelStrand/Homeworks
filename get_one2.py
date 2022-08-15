@@ -12,7 +12,7 @@ for num in range(1, 100+1):
     print(new_url)
     response = requests.get(new_url)
     new_url = response.content.decode()
-    with open(file=f"Temp/get_many_{num}.json", mode="w", encoding="cp1251") as file:
+    with open(file=f"Temp_hw/get_many_{num}.json", mode="w", encoding="cp1251") as file:
         json.dump(new_url, file)
 # airlines = json.loads(new_url)
 # print(type(airlines))
