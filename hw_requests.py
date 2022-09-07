@@ -37,7 +37,7 @@ for i in range(1, 20):
 
     # Поиск ссылки по ключу
     unique_url = response2.json()['url']
-    
+
     # Сохранение фото
     with open(f'Temp_hw/hw_photo_{index}.jpg', mode='w') as file:
         json.dump(unique_url, fp=file)
