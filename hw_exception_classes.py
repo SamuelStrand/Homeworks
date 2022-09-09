@@ -53,10 +53,10 @@ class AuthError(Exception):
 
 
 @checking_data
-def check_user_request():
+def check_user_request(request):
     try:
         if user_input_login_and_password == incorrect_login_and_password:
-            pass
+            return RequestManager(request)
         else:
             raise AuthError(exception_text="incorrect login")
         return 'Error'
@@ -65,13 +65,16 @@ def check_user_request():
         print(error)
 
 
+
 # TASK 3
 class RequestManager:
-    def check_headers(self):
-        if headers1:
-            print('Headers from the first request are ok')
-        else:
-            print('Incorrect headers from the first request')
+    def __init__(self, request):
+        self.request = request
+
+    def check_method(self):
+        if self.request['method'] not in ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']:
+            raise Exception
+
         if headers2:
             print('Headers from the second request are ok')
         else:
@@ -79,7 +82,8 @@ class RequestManager:
 
 
 request_from_user1 = RequestManager()
-request_from_user1.check_headers()
+request_from_user1.check_method()
+
 # TASK 4
 # class Help:
 #     def __init__(self, number_pi=3.14159265359):
@@ -104,5 +108,5 @@ request_from_user1.check_headers()
 # print(f'Длина окружности равна: {obj.find_circumference(radius=5)}')
 
 
-# if __name__ == '__main__':
-#     check_user_request()
+if __name__ == '__main__':
+    check_user_request()
