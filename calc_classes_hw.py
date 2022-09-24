@@ -1,5 +1,5 @@
 import openpyxl
-from openpyxl.utils import get_column_letter
+from openpyxl.utils   import get_column_letter
 
 
 class Calc:
